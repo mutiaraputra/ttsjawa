@@ -195,9 +195,9 @@ with gr.Blocks(theme=MetafisikTheme()) as app:
 
         with gr.Column():
             with gr.Row():
-                gr.Image("ardi.jpg", label="Ardi")
-                gr.Image("gadis.jpg", label="Gadis")
-                gr.Image("wibowo.jpg", label="Wibowo")
+                gr.Image("public/ardi.jpg", label="Ardi")
+                gr.Image("public/gadis.jpg", label="Gadis")
+                gr.Image("public/wibowo.jpg", label="Wibowo")
 
             speaker_dropdown = update_dropdown()
             refresh_button = gr.Button("👨‍👨‍👦 Segarkan Pembicara", elem_id="refresh-button")

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TTS Bahasa Indonesia, Jawa &amp; Sunda</title>
+<meta name="description" content="Ubah teks menjadi suara berbahasa Indonesia, Jawa, dan Sunda dengan lima pilihan pembicara.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128483;</text></svg>">
+</head>
+<body>
+
+<main class="bungkus">
+  <h1 class="judul">TTS Bahasa Indonesia</h1>
+  <p class="subjudul">Juga mendukung bahasa Jawa dan Sunda &mdash; inferensi berjalan di Modal.com</p>
+
+  <div class="kolom">
+
+    <section class="blok">
+      <label class="label" for="teks">Teks</label>
+      <textarea id="teks" rows="4" placeholder="Tulis teks yang ingin disuarakan...">Halo, saya adalah pembicara virtual.</textarea>
+      <p class="hitung"><span id="hitung-teks">0</span> / <span id="maks-teks">1000</span> karakter</p>
+
+      <label class="label" for="kecepatan">Kecepatan Bicara &mdash; <span id="nilai-kecepatan">1.00</span></label>
+      <input type="range" id="kecepatan" min="0.1" max="1.99" step="0.01" value="1">
+
+      <label class="label" for="bahasa">Bahasa</label>
+      <select id="bahasa"></select>
+
+      <button id="tombol-proses" class="tombol-utama">&#128483;&#65039; Lakukan Inferensi Audio</button>
+
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+
+      <div class="penjelasan">
+        <h4>Kegunaan Aplikasi</h4>
+        <p>Aplikasi ini digunakan untuk menghasilkan suara berbasis teks dengan berbagai pilihan
+        pembicara. Teknologi yang digunakan meliputi model text-to-speech (TTS) yang canggih dengan
+        konversi teks ke fonem (G2P). Model yang dipakai dilatih khusus untuk bahasa Indonesia,
+        Jawa, dan Sunda.</p>
+        <h4>Cara Penggunaan</h4>
+        <ol>
+          <li>Masukkan teks yang ingin diubah menjadi suara.</li>
+          <li>Pilih kecepatan bicara yang diinginkan.</li>
+          <li>Pilih bahasa dan pembicara yang diinginkan.</li>
+          <li>Klik tombol &ldquo;Lakukan Inferensi Audio&rdquo; untuk menghasilkan suara.</li>
+        </ol>
+        <p>Semoga <b>Energi Semesta Digital</b> selalu bersama Anda!</p>
+      </div>
+    </section>
+
+    <section class="blok">
+      <div class="deretan-foto">
+        <figure><img src="ardi.jpg" alt="Ardi" loading="lazy"><figcaption>Ardi</figcaption></figure>
+        <figure><img src="gadis.jpg" alt="Gadis" loading="lazy"><figcaption>Gadis</figcaption></figure>
+        <figure><img src="wibowo.jpg" alt="Wibowo" loading="lazy"><figcaption>Wibowo</figcaption></figure>
+      </div>
+
+      <label class="label" for="pembicara">Pilih Pembicara</label>
+      <select id="pembicara"></select>
+
+      <button id="tombol-segarkan" class="tombol-sekunder">&#128104;&#8205;&#128104;&#8205;&#128102; Segarkan Pembicara</button>
+
+      <label class="label" for="audio">Hasil Suara</label>
+      <audio id="audio" controls preload="none"></audio>
+      <a id="tautan-unduh" class="tautan-unduh" download="ttsjawa.wav" hidden>Unduh berkas WAV</a>
+
+      <div class="contoh">
+        <h4>Contoh Suara</h4>
+        <ul>
+          <li><button class="tombol-mini" data-contoh="contoh-suara/wibowo.wav">Wibowo</button></li>
+          <li><button class="tombol-mini" data-contoh="contoh-suara/gadis.wav">Gadis</button></li>
+          <li><button class="tombol-mini" data-contoh="contoh-suara/juminten.wav">Juminten (Jawa)</button></li>
+          <li><button class="tombol-mini" data-contoh="contoh-suara/asep.wav">Asep (Sunda)</button></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <section class="blok pengaturan">
+    <details>
+      <summary>Pengaturan Backend</summary>
+      <div class="isi-pengaturan">
+        <label class="label" for="url-backend">URL Backend Modal</label>
+        <input type="url" id="url-backend" spellcheck="false" placeholder="https://nama-workspace--ttsjawa.modal.run">
+
+        <label class="label" for="kode-akses">Kode Akses</label>
+        <input type="password" id="kode-akses" spellcheck="false" autocomplete="off" placeholder="Kode akses backend">
+
+        <p class="catatan">Nilai disimpan di peramban Anda (localStorage) dan tidak dikirim ke Vercel.</p>
+        <button id="tombol-uji" class="tombol-sekunder">Uji Koneksi</button>
+      </div>
+    </details>
+  </section>
+
+  <footer class="kaki">
+    Energi Semesta Digital &copy; 2024 __drat. | &#127470;&#127465; Untuk Indonesia Jaya!
+  </footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

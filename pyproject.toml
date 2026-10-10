@@ -4,17 +4,24 @@ requires = ['setuptools >= 64']
 [project]
 name = 'g2p-id'
 version = '0.0.5'
-dependencies = [ 
-    'gradio>=5',
-    'torch',
-    'tts',
+# torch di-pin < 2.7 karena mulai 2.9 Coqui TTS mewajibkan torchcodec untuk audio IO.
+# transformers di-pin < 5 karena coqui-tts 0.27.5 masih mengimpor isin_mps_friendly
+# yang sudah dihapus di transformers 5.x.
+dependencies = [
+    'torch>=2.6,<2.7',
+    'torchaudio>=2.6,<2.7',
+    'coqui-tts==0.27.5',
+    'transformers>=4.57,<5',
     'sacremoses>=0.0.41',
     'nltk>=3.7',
     'onnxruntime>=1.7.0',
+    'numpy',
+    'librosa<1.0',
     'wget',
     'simpleaudio',
+    'platformdirs',
     ]
-requires-python = '>=3.6, <3.12'
+requires-python = '>=3.10, <3.15'
 authors = [
     {name='Owo Sugiana', email='sugiana@gmail.com'},
     ]
@@ -25,6 +32,12 @@ classifiers = [
     'Programming Language :: Python :: 3',
     'Operating System :: OS Independent',
     ]
+
+[project.optional-dependencies]
+# Antarmuka Gradio lama, hanya untuk dijalankan di mesin lokal.
+web-lokal = ['gradio>=5']
+# Backend inferensi yang di-deploy ke Modal.com.
+backend = ['fastapi', 'uvicorn', 'modal>=1.0']
 
 [project.scripts]
 tts_drat = 'g2p_id.scripts.tts:main'

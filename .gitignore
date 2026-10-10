@@ -1,8 +1,15 @@
-__pycache__
-*.egg-info
-build
-dist
-*.pth
-*.json
-*.wav
-outputs
+__pycache__/
+*.egg-info/
+build/
+dist/
+venv/
+.venv/
+.vercel/
+
+# Dihasilkan saat runtime oleh g2p_id.scripts.tts
+outputs/
+/config.json
+/tts_drat.wav
+
+# Checkpoint model 330 MB: diunduh saat build image Modal, jangan di-commit
+checkpoint_*.pth

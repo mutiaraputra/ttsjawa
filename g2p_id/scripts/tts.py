@@ -1,6 +1,5 @@
 import sys
 import os
-import re
 import json
 from argparse import ArgumentParser
 from subprocess import call
@@ -8,7 +7,7 @@ import wget
 import g2p_id
 from simpleaudio import WaveObject
 from platformdirs import user_cache_dir
-from .terbilang import terbilang
+from .normalize import text_normalization
 
 
 model_url = 'https://github.com/Wikidepia/indonesian-tts/releases/download/v1.2/checkpoint_1260000-inference.pth'
@@ -43,49 +42,6 @@ def download_model_if_not_exists():
         wget.download(model_url, out=cache_dir)
         print()
         print('Save', model_file)
-
-
-def ganti_angka(s):
-    while True:
-        match = re.search(r'\d+', s)
-        if not match:
-            return s
-        angka = int(match.group(0))
-        t = terbilang(angka)
-        awal, akhir = match.span()
-        s = s[:awal] + t + s[akhir:]
-
-
-def ganti_persen(s):
-    while True:
-        i = s.find('%')
-        if i < 0:
-            return s
-        s = s[:i] + ' persen' + s[i+1:]
-
-
-def ganti_titik_dua(s):
-    while True:
-        match = re.search(r'\b\w+:', s)
-        if not match:
-            return s
-        awal, akhir = match.span()
-        s = s[:akhir-1] + ',' + s[akhir:]
-
-
-def text_normalization(content):
-    text_list = []
-    for line in content.splitlines():
-        line = line.strip()
-        if not line:
-            continue
-        if line[-1] not in ['.', '?', '!']:
-            line = line + '.'
-        line = ganti_angka(line)
-        line = ganti_persen(line)
-        line = ganti_titik_dua(line)
-        text_list.append(line)
-    return '\n'.join(text_list)
 
 
 def tts(content: str, speaker='ardi', output_file='tts_drat.wav') -> int:

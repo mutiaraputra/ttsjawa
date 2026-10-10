@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": "public",
+  "headers": [
+    {
+      "source": "/contoh-suara/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, immutable" }]
+    },
+    {
+      "source": "/(.*).(jpg|css|js)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }]
+    }
+  ]
+}
