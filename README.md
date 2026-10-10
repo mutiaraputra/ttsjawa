@@ -97,6 +97,13 @@ Setiap permintaan selain `/healthz` wajib menyertakan header
 `X-Access-Token`. Container Modal tetap hangat selama 10 menit (`scaledown_window=600`);
 permintaan pertama setelah idle butuh 20–60 detik untuk memuat model.
 
+**Perkiraan latensi (CPU, terukur):** satu kalimat pendek ±11 detik. Naik hampir
+linear dengan panjang teks. `cpu=4.0` sudah dicoba dan ternyata tidak lebih cepat
+(rata-rata 11,0s vs 11,3s) karena thread torch berlebih pada vCPU bersama, jadi
+dipakai `cpu=2.0` yang biayanya separuh. Bila butuh di bawah 1 detik, tambahkan
+`gpu="T4"` pada dekorator `@app.cls(...)` di `modal_app.py` — biayanya jauh lebih
+besar, jadi pertimbangkan dulu.
+
 ## Deploy Frontend ke Vercel
 
 1. Push repo ini ke GitHub.

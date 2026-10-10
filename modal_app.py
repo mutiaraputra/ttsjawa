@@ -210,6 +210,9 @@ def buat_web(mesin: MesinTTS):
     return web
 
 
+# cpu=4.0 sudah dicoba dan tidak lebih cepat (rata-rata 11,0s vs 11,3s) karena
+# thread torch berlebih pada vCPU bersama, jadi dipakai 2.0 yang separuh biayanya.
+# Bila butuh latensi di bawah 1 detik, tambahkan gpu="T4" pada dekorator di bawah.
 @app.cls(
     image=image,
     cpu=2.0,
